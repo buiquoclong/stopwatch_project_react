@@ -116,6 +116,7 @@ button:disabled {
 .laps {
   width: 200px;
   margin-top: 30px;
+  min-height: 60px;
   max-height: 222px;
   overflow-y: auto;
   background: #111;
@@ -124,6 +125,10 @@ button:disabled {
   box-shadow: 0 0 10px #00bfff;
   border: 2px solid black;
   scroll-behavior: smooth;
+  transition: all 0.8s ease;
+}
+.laps.has-lap {
+  min-height: 222px; /* ⬅️ chỉ mở rộng khi có lap */
 }
 
 .laps h3 {
@@ -181,4 +186,44 @@ button:disabled {
 .laps::-webkit-scrollbar-thumb {
   background: rgba(0, 191, 255, 0.6);
   border-radius: 10px;
+}
+
+/* Responsive cho Mobile */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 32px;
+  }
+  .stopwatch-wrapper {
+    flex-direction: column; /* ⬅️ quan trọng */
+    align-items: center;
+  }
+  .stopwatch {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .time-display {
+    font-size: 36px;
+    gap: 2px;
+  }
+
+  .time-unit {
+    width: 55px;
+  }
+
+  .buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .buttons button {
+    width: 100%;
+    margin: 0;
+  }
+
+  .laps {
+    width: 100%;
+    max-width: 100%;
+    margin-top: 16px;
+  }
 }

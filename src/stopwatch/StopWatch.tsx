@@ -16,7 +16,7 @@ const StopWatch = () => {
 
     intervalRef.current = window.setInterval(() => {
       setTime((prev) => prev + 10);
-    }, 10);
+    }, 50);
   };
 
   // Stop
@@ -90,7 +90,7 @@ const StopWatch = () => {
         </div>
 
         {/* Lap list chuyển sang bên phải */}
-        <div className="laps">
+        <div className={`laps ${laps.length > 0 ? "has-lap" : ""}`}>
           <h3>Laps</h3>
           {laps.map((lapTime, index) => {
             const ms = Math.floor((lapTime % 1000) / 10);
