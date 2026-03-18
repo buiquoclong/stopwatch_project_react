@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 import "./StopWatch.css";
 
 const StopWatch = () => {
@@ -9,7 +9,7 @@ const StopWatch = () => {
   const intervalRef = useRef<number | null>(null);
 
   // Start / Resume
-  const start = () => {
+  const start = useCallback(() => {
     if (isRunning) return;
 
     setIsRunning(true);
@@ -17,16 +17,16 @@ const StopWatch = () => {
     intervalRef.current = window.setInterval(() => {
       setTime((prev) => prev + 10);
     }, 50);
-  };
+  }, [isRunning]);
 
   // Stop
-  const stop = () => {
+  const stop = useCallback(() => {
     if (intervalRef.current !== null) {
       clearInterval(intervalRef.current);
       intervalRef.current = null;
     }
     setIsRunning(false);
-  };
+  }, []);
 
   // Reset
   const reset = () => {
@@ -49,9 +49,26 @@ const StopWatch = () => {
   const minutes = Math.floor(time / 60000);
 
   // Cleanup khi unmount (rất quan trọng)
+  // useEffect(() => {
+  //   return () => stop();
+  // }, []);
+
   useEffect(() => {
-    return () => stop();
-  }, []);
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.code === "Space") {
+        e.preventDefault();
+
+        if (isRunning) {
+          stop();
+        } else {
+          start();
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isRunning, start, stop]);
 
   return (
     <div className="stopwatch-container">
