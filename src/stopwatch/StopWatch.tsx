@@ -48,11 +48,6 @@ const StopWatch = () => {
   const seconds = Math.floor((time / 1000) % 60);
   const minutes = Math.floor(time / 60000);
 
-  // Cleanup khi unmount (rất quan trọng)
-  // useEffect(() => {
-  //   return () => stop();
-  // }, []);
-
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.code === "Space") {
