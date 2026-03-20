@@ -14,10 +14,12 @@ const StopWatch = () => {
 
     setIsRunning(true);
 
+    const startTime = Date.now() - time;
+
     intervalRef.current = window.setInterval(() => {
-      setTime((prev) => prev + 10);
-    }, 50);
-  }, [isRunning]);
+      setTime(Date.now() - startTime);
+    }, 10);
+  }, [isRunning, time]);
 
   // Stop
   const stop = useCallback(() => {
