@@ -50,6 +50,7 @@ const StopWatch = () => {
   const seconds = Math.floor((time / 1000) % 60);
   const minutes = Math.floor(time / 60000);
 
+  // Space key event to Start/Stop
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.code === "Space") {
