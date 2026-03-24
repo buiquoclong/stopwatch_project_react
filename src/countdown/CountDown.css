@@ -1,0 +1,235 @@
+/* ===== Container ===== */
+.countdown-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* ===== Title ===== */
+.countdown-title {
+  font-size: 42px;
+  margin-bottom: 20px;
+  text-shadow: 0 0 12px #00bfff;
+}
+
+/* ===== Time selector (group) ===== */
+.time-selector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+
+  padding: 14px;
+  border-radius: 16px;
+
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(6px);
+
+  box-shadow: 0 0 12px rgba(0, 191, 255, 0.15);
+}
+
+/* ===== Preset buttons ===== */
+.preset-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.preset-buttons button {
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 191, 255, 0.3);
+
+  background: transparent;
+  color: #00bfff;
+
+  font-size: 13px;
+  cursor: pointer;
+
+  transition: all 0.25s ease;
+}
+
+/* Hover */
+.preset-buttons button:hover {
+  background: rgba(0, 191, 255, 0.2);
+  color: white;
+  transform: translateY(-1px);
+}
+
+/* Click */
+.preset-buttons button:active {
+  transform: scale(0.95);
+}
+
+/* Disabled */
+.preset-buttons button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ===== Input ===== */
+.custom-input {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.custom-input input {
+  width: 180px;
+  padding: 8px 12px;
+
+  border-radius: 999px;
+  border: 1px solid rgba(0, 191, 255, 0.3);
+
+  background: #111;
+  color: #00bfff;
+
+  text-align: center;
+  font-size: 14px;
+
+  transition: all 0.25s ease;
+}
+
+/* Focus */
+.custom-input input:focus {
+  outline: none;
+  border-color: #00bfff;
+  box-shadow: 0 0 10px rgba(0, 191, 255, 0.6);
+}
+
+/* Placeholder */
+.custom-input input::placeholder {
+  color: rgba(0, 191, 255, 0.5);
+}
+
+/* ===== Card ===== */
+.countdown-card {
+  margin: 30px auto;
+  padding: 30px;
+  width: 420px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #111, #000);
+  box-shadow: 0 0 25px rgba(0, 191, 255, 0.3);
+}
+
+/* ===== Circle ===== */
+.circle-wrapper {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  margin: 0 auto 20px;
+}
+
+/* Background ring */
+.bg-ring {
+  fill: none;
+  stroke: #222;
+  stroke-width: 10;
+}
+
+/* Progress ring */
+.progress-ring-circle {
+  fill: none;
+  stroke: #00bfff;
+  stroke-width: 10;
+  stroke-linecap: round;
+  transform: rotate(-90deg);
+  transform-origin: center;
+  transition:
+    stroke-dashoffset 0.1s linear,
+    stroke 0.3s ease;
+  filter: drop-shadow(0 0 6px #00bfff);
+}
+
+/* Warning (5s cuối) */
+.progress-ring-circle.warning {
+  stroke: #ff4d4d;
+  filter: drop-shadow(0 0 10px #ff4d4d);
+}
+
+/* ===== Time ===== */
+.countdown-time {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 28px;
+  font-weight: bold;
+  color: #00bfff;
+  transition: all 0.3s ease;
+}
+
+/* Warning effect */
+.countdown-time.warning {
+  color: #ff4d4d;
+  animation: pulse 0.8s infinite;
+}
+
+/* Pulse animation */
+@keyframes pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* ===== Buttons ===== */
+.countdown-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.countdown-buttons button {
+  flex: 1;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+/* Primary */
+.primary.start {
+  background: linear-gradient(135deg, #33ccff, #00bfff);
+  color: black;
+  box-shadow: 0 0 10px #00bfff;
+}
+
+.primary.stop {
+  background: linear-gradient(135deg, #ff4d4d, #cc0000);
+  color: white;
+}
+
+/* Hover */
+button:hover {
+  transform: translateY(-2px);
+}
+
+/* Click */
+button:active {
+  transform: scale(0.96);
+}
+
+/* Secondary */
+.secondary {
+  background: #333;
+  color: #ccc;
+}
+.shortcut-hint {
+  font-size: 16px;
+  color: rgba(0, 191, 255, 0.6);
+  margin-top: 16px;
+}
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .countdown-card {
+    width: 100%;
+  }
+}
