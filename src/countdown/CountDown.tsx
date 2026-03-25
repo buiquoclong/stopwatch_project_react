@@ -8,6 +8,7 @@ const CountDown = () => {
 
   const intervalRef = useRef<number | null>(null);
 
+  // ===== Handlers =====
   const start = () => {
     if (isRunning || time <= 0) return;
 
@@ -25,12 +26,12 @@ const CountDown = () => {
       });
     }, 10);
   };
-
+  // dừng đồng hồ nhưng giữ nguyên time để có thể tiếp tục start
   const stop = () => {
     if (intervalRef.current) clearInterval(intervalRef.current);
     setIsRunning(false);
   };
-
+  // dừng đồng hồ và reset time về 0
   const reset = () => {
     stop();
     setTime(0);
