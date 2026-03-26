@@ -8,7 +8,7 @@ const CountDown = () => {
 
   const intervalRef = useRef<number | null>(null);
 
-  // ===== Handlers =====
+  // ===== Start =====
   const start = () => {
     if (isRunning || time <= 0) return;
 
