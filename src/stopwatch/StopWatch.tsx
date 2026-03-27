@@ -104,7 +104,7 @@ const StopWatch = () => {
           </div>
         </div>
 
-        {/* Lap list chuyển sang bên phải */}
+        {/* Lap list ở bên phải */}
         <div className={`laps ${laps.length > 0 ? "has-lap" : ""}`}>
           <h3>Laps</h3>
           {laps.map((lapTime, index) => {
