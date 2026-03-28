@@ -15,7 +15,7 @@ body {
 /* ===== Tabs Wrapper ===== */
 .tabs {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* mỗi tab = 50% chuẩn */
+  grid-template-columns: 1fr 1fr;
   margin: 20px auto;
   padding: 6px;
   border-radius: 16px;
