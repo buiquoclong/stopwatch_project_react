@@ -18,13 +18,10 @@
   align-items: center;
   gap: 12px;
   margin-bottom: 20px;
-
   padding: 14px;
   border-radius: 16px;
-
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(6px);
-
   box-shadow: 0 0 12px rgba(0, 191, 255, 0.15);
 }
 
@@ -40,13 +37,10 @@
   padding: 6px 12px;
   border-radius: 999px;
   border: 1px solid rgba(0, 191, 255, 0.3);
-
   background: transparent;
   color: #00bfff;
-
   font-size: 13px;
   cursor: pointer;
-
   transition: all 0.25s ease;
 }
 
@@ -78,16 +72,12 @@
 .custom-input input {
   width: 180px;
   padding: 8px 12px;
-
   border-radius: 999px;
   border: 1px solid rgba(0, 191, 255, 0.3);
-
   background: #111;
   color: #00bfff;
-
   text-align: center;
   font-size: 14px;
-
   transition: all 0.25s ease;
 }
 
