@@ -15,7 +15,10 @@ body {
 /* ===== Tabs Wrapper ===== */
 .tabs {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(0, 1fr)
+  ); /* Tự động chia đều các tab */
   margin: 20px auto;
   padding: 6px;
   border-radius: 16px;
@@ -23,7 +26,8 @@ body {
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
 
-  width: 300px;
+  width: 90%; /* có thể co nhỏ trên mobile */
+  max-width: 600px; /* giới hạn rộng lớn */
   position: relative;
   overflow: hidden;
   box-shadow: 0 0 20px rgba(0, 191, 255, 0.2);
@@ -43,6 +47,9 @@ body {
 
   transition: transform 0.35s cubic-bezier(0.65, 0, 0.35, 1);
   box-shadow: 0 0 15px rgba(0, 191, 255, 0.6);
+
+  transform: translateX(calc(var(--tab-index) * 100%));
+  width: calc(100% / var(--tab-count) - 6px);
 }
 
 /* ===== Buttons ===== */
