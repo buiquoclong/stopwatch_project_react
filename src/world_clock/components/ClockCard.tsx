@@ -1,3 +1,6 @@
+import { useEffect, useState } from "react";
+import "./Components.css";
+
 type Props = {
   city: string;
   timezone: string;
@@ -5,26 +8,52 @@ type Props = {
 };
 
 const ClockCard = ({ city, timezone, onDelete }: Props) => {
-  const now = new Date();
+  const [time, setTime] = useState<string>("");
+  const [isRemoving, setIsRemoving] = useState(false);
 
-  const time = new Intl.DateTimeFormat("en-US", {
-    timeZone: timezone,
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-    hour12: false,
-  }).format(now);
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+
+      const formatted = new Intl.DateTimeFormat("en-US", {
+        timeZone: timezone,
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: false,
+      }).format(now);
+
+      setTime(formatted);
+    };
+
+    updateTime();
+    const interval = setInterval(updateTime, 1000);
+
+    return () => clearInterval(interval);
+  }, [timezone]);
+
+  const handleDelete = () => {
+    setIsRemoving(true);
+
+    setTimeout(() => {
+      onDelete();
+    }, 300); // match CSS duration
+  };
 
   return (
-    <div className="bg-gray-800 text-white p-4 rounded-xl shadow-md flex justify-between items-center">
-      <div>
-        <h2 className="text-lg font-bold">{city}</h2>
-        <p className="text-sm text-gray-400">{timezone}</p>
+    <div className={`clock-card ${isRemoving ? "removing" : ""}`}>
+      <div className="clock-card__info">
+        <h2>{city}</h2>
+        <p className="clock-card__timezone">{timezone}</p>
       </div>
 
-      <div className="text-2xl font-mono">{time}</div>
+      <div className="clock-card__time">{time}</div>
 
-      <button onClick={onDelete} className="text-red-400 ml-4">
+      <button
+        onClick={handleDelete}
+        className="clock-card__delete"
+        aria-label="Delete timezone"
+      >
         ✕
       </button>
     </div>
