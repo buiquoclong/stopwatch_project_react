@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ClockCard from "./components/ClockCard";
 import AddTimezone from "./components/AddTimezone";
+import "./WorldClock.css";
 
 type Timezone = {
   city: string;
@@ -23,12 +24,12 @@ const WorldClock = () => {
   };
 
   return (
-    <div className="p-6 space-y-4">
-      <h1 className="text-2xl font-bold text-center">🌍 World Clock</h1>
+    <div className="world-clock">
+      <h1 className="world-clock__title">🌍 World Clock</h1>
 
       <AddTimezone onAdd={handleAdd} />
 
-      <div className="grid gap-4">
+      <div className="world-clock__list">
         {zones.map((zone) => (
           <ClockCard
             key={zone.tz}
