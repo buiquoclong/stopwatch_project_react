@@ -9,7 +9,7 @@ function App() {
   // const [tab, setTab] = useState<"stopwatch_tab" | "countdown_tab">(
   //   "stopwatch_tab",
   // );
-  const [tab, setTab] = useState<TabItem["id"]>("stopwatch_tab");
+  const [tab, setTab] = useState<TabItem["id"]>("countdown_tab");
 
   const currentTab = tabs.find((t) => t.id === tab);
   const CurrentComponent = currentTab?.component;
