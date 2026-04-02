@@ -4,6 +4,7 @@ type Props = {
   onAdd: (tz: { city: string; tz: string }) => void;
 };
 
+// Hiển thị danh sách các timezone để người dùng chọn và thêm vào world clock
 const AddTimezone = ({ onAdd }: Props) => {
   return (
     <div className="add-timezone">

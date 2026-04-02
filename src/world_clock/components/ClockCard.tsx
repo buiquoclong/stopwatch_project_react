@@ -7,6 +7,7 @@ type Props = {
   onDelete: () => void;
 };
 
+// Hiển thị thời gian hiện tại của một timezone cụ thể, đồng thời cung cấp nút xóa để loại bỏ timezone khỏi world clock
 const ClockCard = ({ city, timezone, onDelete }: Props) => {
   const [time, setTime] = useState<string>("");
   const [isRemoving, setIsRemoving] = useState(false);
