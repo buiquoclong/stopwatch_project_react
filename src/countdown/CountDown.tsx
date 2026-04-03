@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import "./CountDown.css";
 
 const CountDown = () => {
@@ -7,7 +7,39 @@ const CountDown = () => {
   const [isRunning, setIsRunning] = useState(false);
 
   const intervalRef = useRef<number | null>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  useEffect(() => {
+    audioRef.current = new Audio("/alarm.mp3");
+  }, []);
+  const playAlarm = () => {
+    console.log("🔥 playAlarm called"); // DEBUG
 
+    if (audioRef.current) {
+      audioRef.current.currentTime = 0;
+
+      audioRef.current
+        .play()
+        .then(() => {
+          console.log("✅ Audio played");
+        })
+        .catch((err) => {
+          console.error("❌ Audio play failed:", err);
+        });
+    } else {
+      console.log("❌ audioRef null");
+    }
+  };
+  useEffect(() => {
+    audioRef.current = new Audio("/alarm.mp3");
+
+    audioRef.current.addEventListener("canplaythrough", () => {
+      console.log("✅ Audio loaded OK");
+    });
+
+    audioRef.current.addEventListener("error", (e) => {
+      console.error("❌ Audio load error", e);
+    });
+  }, []);
   // ===== Start =====
   const start = () => {
     if (isRunning || time <= 0) return;
@@ -20,6 +52,7 @@ const CountDown = () => {
         if (prev <= 10) {
           clearInterval(intervalRef.current!);
           setIsRunning(false);
+          playAlarm();
           return 0;
         }
         return prev - 10;
@@ -36,6 +69,10 @@ const CountDown = () => {
     stop();
     setTime(0);
     setInitialTime(0);
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
   };
 
   // ===== Format =====
@@ -52,7 +89,7 @@ const CountDown = () => {
   const strokeDashoffset = circumference * (1 - progress);
 
   const isWarning = time <= 5000 && time > 0;
-  const startWithTime = (newTime: number) => {
+  const startWithTime = useCallback((newTime: number) => {
     // clear interval cũ
     if (intervalRef.current) {
       clearInterval(intervalRef.current);
@@ -67,12 +104,13 @@ const CountDown = () => {
         if (prev <= 10) {
           clearInterval(intervalRef.current!);
           setIsRunning(false);
+          playAlarm();
           return 0;
         }
         return prev - 10;
       });
     }, 10);
-  };
+  }, []);
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       const target = e.target as HTMLElement;
@@ -99,6 +137,7 @@ const CountDown = () => {
                 if (prev <= 10) {
                   clearInterval(intervalRef.current!);
                   setIsRunning(false);
+                  playAlarm();
                   return 0;
                 }
                 return prev - 10;
@@ -130,7 +169,7 @@ const CountDown = () => {
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isRunning, time]);
+  }, [isRunning, time, startWithTime]);
   return (
     <div className="countdown-container">
       <h1 className="countdown-title">Count Down</h1>
