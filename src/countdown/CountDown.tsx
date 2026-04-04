@@ -7,10 +7,12 @@ const CountDown = () => {
   const [isRunning, setIsRunning] = useState(false);
 
   const intervalRef = useRef<number | null>(null);
+  // ===== Audio =====
   const audioRef = useRef<HTMLAudioElement | null>(null);
   useEffect(() => {
     audioRef.current = new Audio("/alarm.mp3");
   }, []);
+  // Gọi âm thanh khi đồng hồ kết thúc
   const playAlarm = () => {
     console.log("🔥 playAlarm called"); // DEBUG
 
@@ -29,6 +31,7 @@ const CountDown = () => {
       console.log("❌ audioRef null");
     }
   };
+  // Load âm thanh một lần khi component mount
   useEffect(() => {
     audioRef.current = new Audio("/alarm.mp3");
 
