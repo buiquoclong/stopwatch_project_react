@@ -14,33 +14,39 @@ const CountDown = () => {
   }, []);
   // Gọi âm thanh khi đồng hồ kết thúc
   const playAlarm = () => {
-    console.log("🔥 playAlarm called"); // DEBUG
+    console.log(" playAlarm called"); // DEBUG
 
+    // Đảm bảo audio đã được load trước khi phát
     if (audioRef.current) {
+      // Reset âm thanh về đầu để đảm bảo nó phát từ đầu mỗi lần
       audioRef.current.currentTime = 0;
 
+      // Thử phát âm thanh và log kết quả
       audioRef.current
         .play()
         .then(() => {
           console.log("✅ Audio played");
         })
         .catch((err) => {
-          console.error("❌ Audio play failed:", err);
+          console.error(" Audio play failed:", err);
         });
     } else {
-      console.log("❌ audioRef null");
+      console.log(" audioRef null");
     }
   };
   // Load âm thanh một lần khi component mount
   useEffect(() => {
+    // Tạo đối tượng Audio và gán vào ref
     audioRef.current = new Audio("/alarm.mp3");
 
+    // Lắng nghe sự kiện load và error để debug
     audioRef.current.addEventListener("canplaythrough", () => {
       console.log("✅ Audio loaded OK");
     });
 
+    // Lắng nghe lỗi tải âm thanh
     audioRef.current.addEventListener("error", (e) => {
-      console.error("❌ Audio load error", e);
+      console.error(" Audio load error", e);
     });
   }, []);
   // ===== Start =====
