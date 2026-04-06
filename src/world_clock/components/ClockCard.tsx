@@ -12,6 +12,7 @@ const ClockCard = ({ city, timezone, onDelete }: Props) => {
   const [time, setTime] = useState<string>("");
   const [isRemoving, setIsRemoving] = useState(false);
 
+  // Cập nhật thời gian mỗi giây
   useEffect(() => {
     const updateTime = () => {
       const now = new Date();
@@ -33,6 +34,7 @@ const ClockCard = ({ city, timezone, onDelete }: Props) => {
     return () => clearInterval(interval);
   }, [timezone]);
 
+  // Xử lý xóa timezone với hiệu ứng mờ dần
   const handleDelete = () => {
     setIsRemoving(true);
 
