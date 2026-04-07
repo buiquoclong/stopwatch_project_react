@@ -1,11 +1,16 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import "./CountDown.css";
-
+type HistoryItem = {
+  id: number;
+  duration: number;
+  finishedAt: string;
+};
 const CountDown = () => {
   const [time, setTime] = useState<number>(0);
   const [initialTime, setInitialTime] = useState<number>(0);
   const [isRunning, setIsRunning] = useState(false);
-
+  const [history, setHistory] = useState<HistoryItem[]>([]);
+  const hasSavedRef = useRef(false);
   const intervalRef = useRef<number | null>(null);
   // ===== Audio =====
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -34,6 +39,17 @@ const CountDown = () => {
       console.log(" audioRef null");
     }
   };
+  const saveHistory = useCallback(() => {
+    const now = new Date();
+
+    const item: HistoryItem = {
+      id: Date.now(),
+      duration: initialTime,
+      finishedAt: now.toLocaleTimeString(),
+    };
+
+    setHistory((prev) => [item, ...prev]); // thêm lên đầu list
+  }, [initialTime]);
   // Load âm thanh một lần khi component mount
   useEffect(() => {
     // Tạo đối tượng Audio và gán vào ref
@@ -53,6 +69,8 @@ const CountDown = () => {
   const start = () => {
     if (isRunning || time <= 0) return;
 
+    hasSavedRef.current = false;
+
     setIsRunning(true);
     setInitialTime(time);
 
@@ -61,7 +79,11 @@ const CountDown = () => {
         if (prev <= 10) {
           clearInterval(intervalRef.current!);
           setIsRunning(false);
-          playAlarm();
+          if (!hasSavedRef.current) {
+            hasSavedRef.current = true;
+            playAlarm();
+            saveHistory();
+          }
           return 0;
         }
         return prev - 10;
@@ -98,28 +120,35 @@ const CountDown = () => {
   const strokeDashoffset = circumference * (1 - progress);
 
   const isWarning = time <= 5000 && time > 0;
-  const startWithTime = useCallback((newTime: number) => {
-    // clear interval cũ
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-    }
+  const startWithTime = useCallback(
+    (newTime: number) => {
+      // clear interval cũ
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
 
-    setTime(newTime);
-    setInitialTime(newTime);
-    setIsRunning(true);
+      setTime(newTime);
+      setInitialTime(newTime);
+      setIsRunning(true);
 
-    intervalRef.current = window.setInterval(() => {
-      setTime((prev) => {
-        if (prev <= 10) {
-          clearInterval(intervalRef.current!);
-          setIsRunning(false);
-          playAlarm();
-          return 0;
-        }
-        return prev - 10;
-      });
-    }, 10);
-  }, []);
+      intervalRef.current = window.setInterval(() => {
+        setTime((prev) => {
+          if (prev <= 10) {
+            clearInterval(intervalRef.current!);
+            setIsRunning(false);
+            if (!hasSavedRef.current) {
+              hasSavedRef.current = true;
+              playAlarm();
+              saveHistory();
+            }
+            return 0;
+          }
+          return prev - 10;
+        });
+      }, 10);
+    },
+    [saveHistory],
+  );
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       const target = e.target as HTMLElement;
@@ -146,7 +175,11 @@ const CountDown = () => {
                 if (prev <= 10) {
                   clearInterval(intervalRef.current!);
                   setIsRunning(false);
-                  playAlarm();
+                  if (!hasSavedRef.current) {
+                    hasSavedRef.current = true;
+                    playAlarm();
+                    saveHistory();
+                  }
                   return 0;
                 }
                 return prev - 10;
@@ -178,7 +211,8 @@ const CountDown = () => {
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isRunning, time, startWithTime]);
+  }, [isRunning, time, startWithTime, saveHistory]);
+
   return (
     <div className="countdown-container">
       <h1 className="countdown-title">Count Down</h1>
@@ -214,43 +248,60 @@ const CountDown = () => {
           />
         </div>
       </div>
+      <div className="main-layout">
+        <div className="countdown-card">
+          {/* Circle */}
+          <div className="circle-wrapper">
+            <svg className="progress-ring" width="220" height="220">
+              <circle className="bg-ring" cx="110" cy="110" r={radius} />
+              <circle
+                className={`progress-ring-circle ${isWarning ? "warning" : ""}`}
+                cx="110"
+                cy="110"
+                r={radius}
+                strokeDasharray={circumference}
+                strokeDashoffset={strokeDashoffset}
+              />
+            </svg>
 
-      <div className="countdown-card">
-        {/* Circle */}
-        <div className="circle-wrapper">
-          <svg className="progress-ring" width="220" height="220">
-            <circle className="bg-ring" cx="110" cy="110" r={radius} />
-            <circle
-              className={`progress-ring-circle ${isWarning ? "warning" : ""}`}
-              cx="110"
-              cy="110"
-              r={radius}
-              strokeDasharray={circumference}
-              strokeDashoffset={strokeDashoffset}
-            />
-          </svg>
-
-          {/* Time */}
-          <div className={`countdown-time ${isWarning ? "warning" : ""}`}>
-            {pad(min)}:{pad(sec)}:{pad(ms)}
+            {/* Time */}
+            <div className={`countdown-time ${isWarning ? "warning" : ""}`}>
+              {pad(min)}:{pad(sec)}:{pad(ms)}
+            </div>
           </div>
-        </div>
 
-        {/* Buttons */}
-        <div className="countdown-buttons">
-          <button
-            className={`primary ${isRunning ? "stop" : "start"}`}
-            onClick={isRunning ? stop : start}
-          >
-            {isRunning ? "Stop" : "Start"}
-          </button>
+          {/* Buttons */}
+          <div className="countdown-buttons">
+            <button
+              className={`primary ${isRunning ? "stop" : "start"}`}
+              onClick={isRunning ? stop : start}
+            >
+              {isRunning ? "Stop" : "Start"}
+            </button>
 
-          <button className="secondary" onClick={reset}>
-            Reset
-          </button>
+            <button className="secondary" onClick={reset}>
+              Reset
+            </button>
+          </div>
+          <p className="shortcut-hint">Press A = 30s • C = 45s </p>
+          <p className="shortcut-hint">S = 60s • D = 120s</p>
         </div>
-        <p className="shortcut-hint">Press A = 30s • C = 45s </p>
-        <p className="shortcut-hint">S = 60s • D = 120s</p>
+        <div className="history">
+          <h3>History</h3>
+
+          {history.length === 0 ? (
+            <p className="empty">No countdown yet</p>
+          ) : (
+            <div className="history-grid">
+              {history.map((item) => (
+                <div key={item.id} className="history-item">
+                  <div className="time">⏱ {item.duration / 1000}s</div>
+                  <div className="done">✅ {item.finishedAt}</div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
