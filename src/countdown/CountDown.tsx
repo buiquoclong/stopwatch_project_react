@@ -127,6 +127,8 @@ const CountDown = () => {
         clearInterval(intervalRef.current);
       }
 
+      hasSavedRef.current = false;
+
       setTime(newTime);
       setInitialTime(newTime);
       setIsRunning(true);
