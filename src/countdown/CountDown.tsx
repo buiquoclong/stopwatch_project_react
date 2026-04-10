@@ -39,6 +39,7 @@ const CountDown = () => {
       console.log(" audioRef null");
     }
   };
+  // Lưu lịch sử mỗi khi đồng hồ kết thúc
   const saveHistory = useCallback(() => {
     const now = new Date();
 
@@ -120,6 +121,7 @@ const CountDown = () => {
   const strokeDashoffset = circumference * (1 - progress);
 
   const isWarning = time <= 5000 && time > 0;
+  // ===== Keyboard Shortcuts =====
   const startWithTime = useCallback(
     (newTime: number) => {
       // clear interval cũ
