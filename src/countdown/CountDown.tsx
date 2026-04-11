@@ -121,7 +121,7 @@ const CountDown = () => {
   const strokeDashoffset = circumference * (1 - progress);
 
   const isWarning = time <= 5000 && time > 0;
-  // ===== Keyboard Shortcuts =====
+  // ===== Thực hiện start với thời gian mới (dùng cho shortcuts) =====
   const startWithTime = useCallback(
     (newTime: number) => {
       // clear interval cũ
