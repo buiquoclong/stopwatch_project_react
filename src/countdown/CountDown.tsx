@@ -194,6 +194,7 @@ const CountDown = () => {
 
         return; // tránh chạy xuống shortcuts
       }
+      // danh sách shortcuts
       const shortcuts: Record<string, number> = {
         c: 45,
         a: 30,
