@@ -40,17 +40,17 @@ const CountDown = () => {
     }
   };
   // Lưu lịch sử mỗi khi đồng hồ kết thúc
-  const saveHistory = useCallback(() => {
+  const saveHistory = useCallback((duration: number) => {
     const now = new Date();
 
     const item: HistoryItem = {
       id: Date.now(),
-      duration: initialTime,
+      duration: duration,
       finishedAt: now.toLocaleTimeString(),
     };
 
-    setHistory((prev) => [item, ...prev]); // thêm lên đầu list
-  }, [initialTime]);
+    setHistory((prev) => [item, ...prev]);
+  }, []);
   // Load âm thanh một lần khi component mount
   useEffect(() => {
     // Tạo đối tượng Audio và gán vào ref
@@ -83,7 +83,7 @@ const CountDown = () => {
           if (!hasSavedRef.current) {
             hasSavedRef.current = true;
             playAlarm();
-            saveHistory();
+            saveHistory(initialTime);
           }
           return 0;
         }
@@ -143,7 +143,7 @@ const CountDown = () => {
             if (!hasSavedRef.current) {
               hasSavedRef.current = true;
               playAlarm();
-              saveHistory();
+              saveHistory(newTime);
             }
             return 0;
           }
@@ -172,6 +172,9 @@ const CountDown = () => {
         } else {
           // START (chỉ khi có time)
           if (time > 0) {
+            hasSavedRef.current = false;
+
+            const duration = time;
             setIsRunning(true);
 
             intervalRef.current = window.setInterval(() => {
@@ -182,7 +185,7 @@ const CountDown = () => {
                   if (!hasSavedRef.current) {
                     hasSavedRef.current = true;
                     playAlarm();
-                    saveHistory();
+                    saveHistory(duration);
                   }
                   return 0;
                 }
