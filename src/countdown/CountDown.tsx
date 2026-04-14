@@ -89,7 +89,7 @@ const CountDown = () => {
         }
         return prev - 10;
       });
-    }, 10);
+    }, 100);
   };
   // dừng đồng hồ nhưng giữ nguyên time để có thể tiếp tục start
   const stop = () => {
@@ -149,7 +149,7 @@ const CountDown = () => {
           }
           return prev - 10;
         });
-      }, 10);
+      }, 100);
     },
     [saveHistory],
   );
@@ -191,7 +191,7 @@ const CountDown = () => {
                 }
                 return prev - 10;
               });
-            }, 10);
+            }, 100);
           }
         }
 
