@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./Components.css";
 
+// Khai báo kiểu Props cho component ClockCard, bao gồm tên thành phố, timezone và hàm onDelete để xóa timezone khỏi world clock
 type Props = {
   city: string;
   timezone: string;
