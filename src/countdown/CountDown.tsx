@@ -89,7 +89,7 @@ const CountDown = () => {
         }
         return prev - 10;
       });
-    }, 100);
+    }, 10);
   };
   // dừng đồng hồ nhưng giữ nguyên time để có thể tiếp tục start
   const stop = () => {
@@ -135,6 +135,7 @@ const CountDown = () => {
       setInitialTime(newTime);
       setIsRunning(true);
 
+      // cài đặt thời gian countdown đếm ngược đúng với thời gian theo đơn vị  
       intervalRef.current = window.setInterval(() => {
         setTime((prev) => {
           if (prev <= 10) {
@@ -149,7 +150,7 @@ const CountDown = () => {
           }
           return prev - 10;
         });
-      }, 100);
+      }, 10);
     },
     [saveHistory],
   );
@@ -191,7 +192,7 @@ const CountDown = () => {
                 }
                 return prev - 10;
               });
-            }, 100);
+            }, 10);
           }
         }
 
