@@ -135,7 +135,7 @@ const CountDown = () => {
       setInitialTime(newTime);
       setIsRunning(true);
 
-      // cài đặt thời gian countdown đếm ngược đúng với thời gian theo đơn vị  
+      // cài đặt thời gian countdown đếm ngược đúng với thời gian theo đơn vị
       intervalRef.current = window.setInterval(() => {
         setTime((prev) => {
           if (prev <= 10) {
@@ -163,6 +163,7 @@ const CountDown = () => {
       if (e.code === "Space") {
         e.preventDefault();
 
+        // nếu đang chạy thì stop, nếu đang dừng thì start (chỉ khi có time)
         if (isRunning) {
           // STOP
           if (intervalRef.current) {
