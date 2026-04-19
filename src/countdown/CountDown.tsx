@@ -154,6 +154,8 @@ const CountDown = () => {
     },
     [saveHistory],
   );
+
+  // ===== Shortcuts (Keyboard)=====
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       const target = e.target as HTMLElement;
