@@ -120,6 +120,7 @@ const CountDown = () => {
   const progress = initialTime ? time / initialTime : 0;
   const strokeDashoffset = circumference * (1 - progress);
 
+  // Cảnh báo khi thời gian còn lại <= 5s
   const isWarning = time <= 5000 && time > 0;
   // ===== Thực hiện start với thời gian mới (dùng cho shortcuts) =====
   const startWithTime = useCallback(
