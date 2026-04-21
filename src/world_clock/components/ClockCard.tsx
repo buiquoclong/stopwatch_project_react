@@ -18,6 +18,7 @@ const ClockCard = ({ city, timezone, onDelete }: Props) => {
     const updateTime = () => {
       const now = new Date();
 
+      // Sử dụng Intl.DateTimeFormat để định dạng thời gian theo timezone đã cho
       const formatted = new Intl.DateTimeFormat("en-US", {
         timeZone: timezone,
         hour: "2-digit",
