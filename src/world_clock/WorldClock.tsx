@@ -8,17 +8,20 @@ type Timezone = {
   tz: string;
 };
 
+// Lưu zones vào localStorage để giữ trạng thái khi reload
 const WorldClock = () => {
   const [zones, setZones] = useState<Timezone[]>([
     { city: "Ho Chi Minh", tz: "Asia/Ho_Chi_Minh" },
   ]);
 
+  // Kiểm tra trùng timezone trước khi thêm vào danh sách
   const handleAdd = (zone: Timezone) => {
     if (!zones.find((z) => z.tz === zone.tz)) {
       setZones([...zones, zone]);
     }
   };
 
+  // Xóa timezone khỏi danh sách
   const handleDelete = (tz: string) => {
     setZones(zones.filter((z) => z.tz !== tz));
   };
