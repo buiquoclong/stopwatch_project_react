@@ -202,7 +202,7 @@ const CountDown = () => {
 
         return; // tránh chạy xuống shortcuts
       }
-      // danh sách shortcuts
+      // danh sách shortcuts được định nghĩa sẵn với key là phím bấm và value là thời gian tương ứng (đơn vị: giây)
       const shortcuts: Record<string, number> = {
         c: 45,
         a: 30,
