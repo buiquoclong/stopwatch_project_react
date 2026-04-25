@@ -3,6 +3,7 @@ import CountDown from "../countdown/CountDown";
 import WorldClock from "../world_clock/WorldClock";
 import type { TabItem } from "./tab.types";
 
+// Cấu hình các tab
 export const tabs: TabItem[] = [
   {
     id: "stopwatch_tab",
