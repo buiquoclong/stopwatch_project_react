@@ -107,7 +107,7 @@ const CountDown = () => {
     }
   };
 
-  // ===== Format =====
+  // ===== Format (thời gian)=====
   const pad = (num: number) => String(num).padStart(2, "0");
 
   const ms = Math.floor((time % 1000) / 10);
