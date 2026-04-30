@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import "./CountDown.css";
+// Khai báo mục lịch sử với id, duration (thời gian đếm ngược đã hoàn thành) và finishedAt (thời gian hoàn thành)
 type HistoryItem = {
   id: number;
   duration: number;
