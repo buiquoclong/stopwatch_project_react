@@ -8,7 +8,7 @@ const StopWatch = () => {
 
   const intervalRef = useRef<number | null>(null);
 
-  // Start / Resume(Chức năng bắt đầu, tiếp tục chạy sau khi đã dừng) stopwatch
+  // Start, Resume(Chức năng bắt đầu, tiếp tục chạy sau khi đã dừng)
   const start = useCallback(() => {
     if (isRunning) return;
 
