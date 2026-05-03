@@ -21,7 +21,7 @@ const WorldClock = () => {
     }
   };
 
-  // Xóa timezone khỏi danh sách
+  // Xóa timezone khỏi danh sách các clock card đang hiển thị
   const handleDelete = (tz: string) => {
     setZones(zones.filter((z) => z.tz !== tz));
   };
