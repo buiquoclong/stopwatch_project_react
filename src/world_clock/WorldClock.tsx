@@ -10,6 +10,7 @@ type Timezone = {
 
 // Lưu zones vào localStorage để giữ trạng thái khi reload
 const WorldClock = () => {
+  // Khởi tạo với timezone mặc định là Ho Chi Minh, có thể thay đổi hoặc thêm mới sau
   const [zones, setZones] = useState<Timezone[]>([
     { city: "Ho Chi Minh", tz: "Asia/Ho_Chi_Minh" },
   ]);
