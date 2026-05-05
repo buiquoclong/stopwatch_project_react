@@ -157,13 +157,13 @@ const CountDown = () => {
     [saveHistory],
   );
 
-  // ===== Shortcuts (Keyboard)=====
+  // ===== Shortcuts (Keyboard), xử lý các phím tắt từ bàn phím =====
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       const target = e.target as HTMLElement;
       // tránh khi đang nhập input
       if (target.tagName === "INPUT") return;
-      // ===== SPACE: toggle start/stop =====
+      // ===== SPACE: toggle start/stop (Xử lý sự kiện space)=====
       if (e.code === "Space") {
         e.preventDefault();
 
