@@ -21,7 +21,7 @@ const StopWatch = () => {
     }, 10);
   }, [isRunning, time]);
 
-  // Stop
+  // Chức năng dừng, tạm dừng
   const stop = useCallback(() => {
     if (intervalRef.current !== null) {
       clearInterval(intervalRef.current);
