@@ -30,7 +30,7 @@ const StopWatch = () => {
     setIsRunning(false);
   }, []);
 
-  // Reset
+  // Chức năng đặt lại đồng hồ về 0 và xóa tất cả các lap đã ghi lại
   const reset = () => {
     stop();
     setTime(0);
