@@ -37,7 +37,7 @@ const StopWatch = () => {
     setLaps([]);
   };
 
-  // Lap
+  //  Chức năng ghi lại thời gian hiện tại vào danh sách lap khi đồng hồ đang chạy
   const lap = () => {
     if (!isRunning) return;
     setLaps((prev) => [time, ...prev]);
