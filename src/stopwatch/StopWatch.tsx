@@ -43,7 +43,7 @@ const StopWatch = () => {
     setLaps((prev) => [time, ...prev]);
   };
 
-  // Format time
+  // Format time (phút:giây:phần trăm giây) với hàm pad để đảm bảo luôn hiển thị 2 chữ số
   const pad = (num: number): string => String(num).padStart(2, "0");
 
   const milliseconds = Math.floor((time % 1000) / 10);
