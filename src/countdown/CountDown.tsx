@@ -115,7 +115,7 @@ const CountDown = () => {
   const sec = Math.floor((time / 1000) % 60);
   const min = Math.floor(time / 60000);
 
-  // ===== Progress Circle =====
+  // ===== Progress Circle ===== (Điều chỉnh bán kính, chu vi và offset của vòng tròn tiến trình dựa trên thời gian còn lại so với thời gian ban đầu) =====
   const radius = 90;
   const circumference = 2 * Math.PI * radius;
   const progress = initialTime ? time / initialTime : 0;
