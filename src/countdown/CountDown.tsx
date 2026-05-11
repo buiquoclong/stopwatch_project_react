@@ -67,7 +67,7 @@ const CountDown = () => {
       console.error(" Audio load error", e);
     });
   }, []);
-  // ===== Start =====
+  // ===== Start (bắt đầu đếm ngược) =====
   const start = () => {
     if (isRunning || time <= 0) return;
 
