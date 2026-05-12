@@ -1,5 +1,5 @@
 export const TIMEZONES = [
-  // Asia
+  // Asia (Châu Á)
   { city: "Ho Chi Minh City", tz: "Asia/Ho_Chi_Minh" },
   { city: "Bangkok", tz: "Asia/Bangkok" },
   { city: "Jakarta", tz: "Asia/Jakarta" },
@@ -14,7 +14,7 @@ export const TIMEZONES = [
   { city: "Dubai", tz: "Asia/Dubai" },
   { city: "Mumbai", tz: "Asia/Kolkata" },
 
-  // Europe
+  // Europe (Châu Âu)
   { city: "London", tz: "Europe/London" },
   { city: "Dublin", tz: "Europe/Dublin" },
   { city: "Lisbon", tz: "Europe/Lisbon" },
@@ -27,7 +27,7 @@ export const TIMEZONES = [
   { city: "Vienna", tz: "Europe/Vienna" },
   { city: "Moscow", tz: "Europe/Moscow" },
 
-  // Americas
+  // Americas (Châu Mỹ)
   { city: "New York", tz: "America/New_York" },
   { city: "Toronto", tz: "America/Toronto" },
   { city: "Chicago", tz: "America/Chicago" },
@@ -38,13 +38,13 @@ export const TIMEZONES = [
   { city: "Sao Paulo", tz: "America/Sao_Paulo" },
   { city: "Buenos Aires", tz: "America/Argentina/Buenos_Aires" },
 
-  // Africa
+  // Africa (Châu Phi)
   { city: "Cairo", tz: "Africa/Cairo" },
   { city: "Johannesburg", tz: "Africa/Johannesburg" },
   { city: "Nairobi", tz: "Africa/Nairobi" },
   { city: "Lagos", tz: "Africa/Lagos" },
 
-  // Oceania
+  // Oceania (Châu Đại Dương)
   { city: "Sydney", tz: "Australia/Sydney" },
   { city: "Melbourne", tz: "Australia/Melbourne" },
   { city: "Brisbane", tz: "Australia/Brisbane" },
