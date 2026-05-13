@@ -62,7 +62,7 @@ const CountDown = () => {
       console.log("✅ Audio loaded OK");
     });
 
-    // Lắng nghe lỗi tải âm thanh
+    // Lắng nghe lỗi tải âm thanh (nếu có lỗi tải âm thanh, sẽ log lỗi này)
     audioRef.current.addEventListener("error", (e) => {
       console.error(" Audio load error", e);
     });
