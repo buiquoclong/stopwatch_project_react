@@ -62,7 +62,7 @@ const CountDown = () => {
       console.log("✅ Audio loaded OK");
     });
 
-    // Lắng nghe lỗi tải âm thanh (nếu có lỗi tải âm thanh, sẽ log lỗi này)
+    // Lắng nghe lỗi tải âm thanh (nếu có lỗi tải âm thanh, sẽ log lỗi này  )
     audioRef.current.addEventListener("error", (e) => {
       console.error(" Audio load error", e);
     });
@@ -115,7 +115,8 @@ const CountDown = () => {
   const sec = Math.floor((time / 1000) % 60);
   const min = Math.floor(time / 60000);
 
-  // ===== Progress Circle ===== (Điều chỉnh bán kính, chu vi và offset của vòng tròn tiến trình dựa trên thời gian còn lại so với thời gian ban đầu) =====
+  // ===== Progress Circle ===== (Điều chỉnh bán kính, chu vi và offset của vòng tròn tiến trình
+  // dựa trên thời gian còn lại so với thời gian ban đầu) =====
   const radius = 90;
   const circumference = 2 * Math.PI * radius;
   const progress = initialTime ? time / initialTime : 0;
