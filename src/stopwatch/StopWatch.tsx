@@ -50,7 +50,7 @@ const StopWatch = () => {
   const seconds = Math.floor((time / 1000) % 60);
   const minutes = Math.floor(time / 60000);
 
-  // Space key event to Start/Stop
+  // Hoat động khi người dùng nhấn phím Space để bắt đầu hoặc dừng đồng hồ
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.code === "Space") {
