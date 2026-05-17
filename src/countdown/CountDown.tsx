@@ -15,6 +15,7 @@ const CountDown = () => {
   const intervalRef = useRef<number | null>(null);
   // ===== Audio =====
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  // Load âm thanh một lần khi component mount
   useEffect(() => {
     audioRef.current = new Audio("/alarm.mp3");
   }, []);
