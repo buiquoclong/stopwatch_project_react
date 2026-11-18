@@ -8,7 +8,7 @@ const StopWatch = () => {
 
   const intervalRef = useRef<number | null>(null);
 
-  // Start, Resume(Chức năng bắt đầu, tiếp tục chạy sau khi đã dừng)
+  // Bắt đầu hoặc tiếp tục đồng hồ, sử dụng thời gian hiện tại để đảm bảo không bị reset khi Resume
   const start = useCallback(() => {
     if (isRunning) return;
 
@@ -21,7 +21,7 @@ const StopWatch = () => {
     }, 10);
   }, [isRunning, time]);
 
-  // Chức năng dừng, tạm dừng
+  // Dừng đồng hồ và giải phóng interval hiện tại để tránh chạy nhiều interval cùng lúc
   const stop = useCallback(() => {
     if (intervalRef.current !== null) {
       clearInterval(intervalRef.current);
@@ -30,27 +30,27 @@ const StopWatch = () => {
     setIsRunning(false);
   }, []);
 
-  // Chức năng đặt lại đồng hồ về 0 và xóa tất cả các lap đã ghi lại
+  // Đặt lại đồng hồ về 0, dừng interval và xóa toàn bộ danh sách lap
   const reset = () => {
     stop();
     setTime(0);
     setLaps([]);
   };
 
-  //  Chức năng ghi lại thời gian hiện tại vào danh sách lap khi đồng hồ đang chạy
+  // Ghi nhận thời gian hiện tại vào đầu danh sách lap khi đồng hồ đang chạy
   const lap = () => {
     if (!isRunning) return;
     setLaps((prev) => [time, ...prev]);
   };
 
-  // Format time (phút:giây:phần trăm giây) với hàm pad để đảm bảo luôn hiển thị 2 chữ số
+  // Đảm bảo các giá trị thời gian luôn hiển thị đủ 2 chữ số
   const pad = (num: number): string => String(num).padStart(2, "0");
 
   const milliseconds = Math.floor((time % 1000) / 10);
   const seconds = Math.floor((time / 1000) % 60);
   const minutes = Math.floor(time / 60000);
 
-  // Hoat động khi người dùng nhấn phím Space để bắt đầu hoặc dừng đồng hồ
+  // Đăng ký phím tắt Space để bắt đầu hoặc dừng đồng hồ, đồng thời cleanup sự kiện khi component unmount
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.code === "Space") {
