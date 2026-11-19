@@ -74,7 +74,6 @@ const StopWatch = () => {
 
       <div className="stopwatch-wrapper">
         <div className={`stopwatch ${isRunning ? "running" : ""}`}>
-          {/* Time */}
           <div className="time-display">
             <span className="time-unit">{pad(minutes)}</span>
             <span className="colon">:</span>
@@ -83,9 +82,7 @@ const StopWatch = () => {
             <span className="time-unit">{pad(milliseconds)}</span>
           </div>
 
-          {/* Buttons */}
           <div className="buttons">
-            {/* Left button */}
             <button
               className={`primary-btn ${isRunning ? "stop" : "start"}`}
               onClick={isRunning ? stop : start}
@@ -93,7 +90,6 @@ const StopWatch = () => {
               {isRunning ? "Stop" : "Start"}
             </button>
 
-            {/* Right button */}
             <button
               className="secondary-btn"
               onClick={isRunning ? lap : reset}
@@ -104,7 +100,6 @@ const StopWatch = () => {
           </div>
         </div>
 
-        {/* Lap list ở bên phải */}
         <div className={`laps ${laps.length > 0 ? "has-lap" : ""}`}>
           <h3>Laps</h3>
           {laps.map((lapTime, index) => {
