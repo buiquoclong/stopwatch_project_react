@@ -12,7 +12,7 @@ type Props = {
 const ClockCard = ({ city, timezone, onDelete }: Props) => {
   const [time, setTime] = useState<string>("");
   const [isRemoving, setIsRemoving] = useState(false);
-cd 
+
   useEffect(() => {
     // Cập nhật thời gian hiện tại theo timezone được truyền vào component
     const updateTime = () => {
@@ -41,7 +41,7 @@ cd
 
     setTimeout(() => {
       onDelete();
-    }, 300); // match CSS duration
+    }, 300);
   };
 
   return (
